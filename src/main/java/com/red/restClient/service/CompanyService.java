@@ -20,9 +20,6 @@ public class CompanyService {
 
     final RestTemplate restTemplate = new RestTemplate();
 
-    private static final TypeReference<Company[]> COMPANY_ARRAY_REFERENCE = new TypeReference<Company[]>() {
-    };
-
     public CompanyService(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
