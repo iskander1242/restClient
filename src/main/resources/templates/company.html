@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Сервис получения данных</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body style="background-color: #b1dfbb">
+<div id="main">
+    <div>
+        <h3>Получение дaнных по УНП</h3>
+        <form action="#" th:action="@{/company}" method="post" th:object="${company}">
+            <label>УНП:</label>
+            <input type="text" th:field="*{registrationNumber}"/><br/>
+            <button type="submit">Заполнить</button>
+        </form>
+        <div th:if="${errorMessage}" th:utext="${errorMessage}"
+             style="color:red;font-style:italic;margin-left: 6px;">
+            ...
+        </div>
+    </div>
+    <div align="left">
+
+        <label>Статус:</label>
+        <input type="text" th:field="*{company.status}"/><br/>
+
+        <label>Дата постановки на учет:</label>
+        <input type="text" th:field="*{company.registrationDate}"/><br/>
+
+        <label>Адрес:</label>
+        <input type="text" th:field="*{company.address}"/><br/>
+
+        <label>Полное наименование:</label>
+        <textarea
+                rows="8" cols="20"
+                  th:field="*{company.fullName}"></textarea>
+    </div>
+</div>
+</body>
+</html>
