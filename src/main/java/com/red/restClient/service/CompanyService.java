@@ -1,10 +1,11 @@
 package com.red.restClient.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.red.restClient.model.Company;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,10 +28,9 @@ public class CompanyService {
     public Company getCompanyById(String registrationNumber) throws Exception {
         List<Company> companyList = null;
 
-        Map<String, String> params = new HashMap<>();
-        params.put("NM", registrationNumber);
-
-        companyList = Arrays.asList(restTemplate.getForEntity(EGR_API_URL, Company[].class, params).getBody());
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(EGR_API_URL).queryParam("NM",registrationNumber);
+        final ResponseEntity<Company[]> forEntity = restTemplate.getForEntity(builder.toUriString(),Company[].class);
+        companyList = Arrays.asList(forEntity.getBody());
 
         return companyList.get(0);
     }
