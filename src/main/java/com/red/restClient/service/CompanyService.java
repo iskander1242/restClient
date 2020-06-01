@@ -6,10 +6,6 @@ import com.red.restClient.model.Company;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
-import java.net.URI;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -38,11 +34,6 @@ public class CompanyService {
         params.put("NM", registrationNumber);
 
         companyList = Arrays.asList(restTemplate.getForEntity(EGR_API_URL, Company[].class, params).getBody());
-
-//        URI responseTest = getClass().getClassLoader()
-//                .getResource("responseTest").toURI();
-//        final File src = new File(responseTest);
-//        companyList = Arrays.asList(objectMapper.readValue(src, COMPANY_ARRAY_REFERENCE));
 
         return companyList.get(0);
     }
